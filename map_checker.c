@@ -10,56 +10,65 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
-static int height(int fd)
+int	height(int fd)
 {
+	char	*lane;
 	int		i;
-	int		len;
-	char	*linea;
 
 	i = 1;
-	linea = get_next_line(fd);
-	len = ft_strlen(linea);
-	while (linea)
+	lane = get_next_line(fd);
+	while (lane)
 	{
-		if(len != ft_strlen(linea))
-			write(1, "INVALID MAP", 12);
-		linea = get_next_line(fd);
+		lane = get_next_line(fd);
 		i++;
-		free(linea);
 	}
 	return(i);
 }
-
-char	**map(int fd2, int fd)
+int	len_checker(int	fd, int fd2)
 {
+	char	**copy;
 	int		i;
-	char	**matrix;
-	int		pinga;
-
-	pinga = height(fd);	
-	i = 0;
-	matrix = malloc(sizeof(char *) * pinga);
-	printf("%d\n", pinga);
-	while (i < pinga)
-	{
-		matrix[i] = get_next_line(fd2);
-		printf("matriz  %s\n", matrix[i]);
-		i++;
-	}
-	return (matrix);
+	
+	copy = map(fd);
+	i = height(fd2);
 }
 
-int	main(void)
+char	*map(int fd)
 {
-	int	fd;
-	int	fd2;
-	char	**map2;
+	int		i;
+	char	*file;
+	char	*lane;
+	
+	lane = get_next_line(fd);
+	i = 0;
+	file = ft_calloc(1,1);
+	while (lane)
+	{
+		file = ft_strjoin(file, lane);
+		lane = get_next_line(fd);
+		i++;
+	}
+	return (file);
+}
 
+char	**map_splited(int fd)
+{
+	char	*map2 = map(fd);
+	char	**def = ft_split(map2, '\n');
+	return (def);
+}
+
+ int	main(void)
+{
+	int		fd;
+	int		fd2;
 	fd = open("/Users/agserran/CURSUS/so_long/map.ber", O_RDONLY);	
 	fd2 = open("/Users/agserran/CURSUS/so_long/map.ber", O_RDONLY);	
-	map(fd2, fd);
+	map(fd);
+	height(fd2);
+	
 	//checker_map(map2, fd);
 	return 0;
 }
