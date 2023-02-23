@@ -94,7 +94,7 @@ static char	*clearstash(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[FD_SETSIZE];
+	static char	*stash[1024];
 	char		*buf;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

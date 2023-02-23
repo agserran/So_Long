@@ -18,4 +18,8 @@ char	*ft_strjoin(char *stash, char *buffer);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	**checker(char **str);
 char    **ft_split(char const *s, char c);
+void	ft_putstr(char	*s);
+char	**mapa(int fd);
+int	    len_checker(int	fd, int fd2);
+
 #endif
