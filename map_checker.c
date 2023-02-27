@@ -34,21 +34,18 @@ int	len_checker(int	fd, int fd2)
 	int		c;
 	
 	i = 0;
-	h = height(fd2);
-	matrix = mapa(fd);
-	printf("hola");
+	h = height(fd);
+	matrix = mapa(fd2);
 	while(i < h)
 	{
 		if(ft_strlen(matrix[0]) != ft_strlen(matrix[i]))
 		{
 			ft_putstr("Invalid map, the map have to be rectangular.");
-			c++;
-			return (c);
+			return (1);
 		}
 		i++;
 	}
-	printf("%d\n", c);
-	return (c);
+	return (2);
 }
 
 char	**mapa(int fd)
@@ -66,21 +63,51 @@ char	**mapa(int fd)
 		file = ft_strjoin(file, lane);
 		lane = get_next_line(fd);
 		i++;
-		printf("LINEA %s\n", file);
 	}
 	matrix = ft_split(file, '\n');
+	close(fd);
 	return (matrix);
+}
+
+int	side_checker(int fd, int fd2)
+{
+	char	**copy;
+	int		y;
+	int		x;
+	int		max_X;
+	int		max_Y;
+
+	max_Y = height(fd2);
+	max_X = ft_strlen(copy[0]);
+	copy = mapa(fd);
+	printf("antes del bucle");
+	while(copy[y])
+	{
+		while(copy[y][x])
+		{
+			if (copy[0][x] != 1 || copy[max_Y][x] != 1)
+				return(0);
+			x++;
+		}
+		while(y > 0 && y < max_Y)
+		{
+			
+		}
+	}
+	return(1);
 }
 
  int	main(void)
 {
 	int		fd;
 	int		fd2;
-	fd = open("/Users/agserran/CURSUS/so_long/map.ber", O_RDONLY);	
-	fd2 = open("/Users/agserran/CURSUS/so_long/map.ber", O_RDONLY);	
-	mapa(fd);
+	fd = open("C:/Users/agust/Desktop/progamacion/So_Long/map.ber", O_RDONLY);	
+	fd2 = open("C:/Users/agust/Desktop/progamacion/So_Long/map.ber", O_RDONLY);	
+	//mapa(fd);
+	//len_checker(fd, fd2);
 	//height(fd2);
 	//int b = len_checker(fd, fd2);
 	//printf("%d", b);
+	side_checker(fd, fd2);
 	return 0;
 }
