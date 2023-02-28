@@ -77,22 +77,33 @@ int	side_checker(int fd, int fd2)
 	int		max_X;
 	int		max_Y;
 
+	y = 0;
+	x = 0;
 	max_Y = height(fd2);
-	max_X = ft_strlen(copy[0]);
 	copy = mapa(fd);
+	max_X = ft_strlen(copy[0]);
 	printf("antes del bucle");
-	while(copy[y])
+	char	*prueba = copy[2];
+	printf("%d", max_X - 1);
+	while(y < max_Y - 1)
 	{
-		while(copy[y][x])
+		printf("bucle2");
+		while(x < max_X)
 		{
-			if (copy[0][x] != 1 || copy[max_Y][x] != 1)
-				return(0);
+			printf("bucle 3");
+			if(copy[0][x] != '1' || copy[max_Y - 1][x] != '1' )
+			{
+				printf("invalid map\n");
+				return (0);
+			}
+			if(copy[y][max_X - 1] != '1' || copy[y][0] != '1')
+			{
+				printf("invalid map");
+				return (0);
+			}
 			x++;
 		}
-		while(y > 0 && y < max_Y)
-		{
-			
-		}
+		y++;
 	}
 	return(1);
 }
