@@ -16,16 +16,30 @@ typedef struct s_player
 	int	y;
 }t_player;
 
+typedef struct s_collectables
+{
+	int	x;
+	int	y;
+}t_collectables;
+
+typedef struct s_exit
+{
+	int	x;
+	int	y;
+}t_exit;
+
 typedef struct s_map
 {
-	int			height;
-	int			wide;
-	char		**matrix;
-	char		**copy;
-	int			exits;
-	int			player;
-	int			collect;
-	t_player	p;
+	int				height;
+	int				wide;
+	char			**matrix;
+	char			**copy;
+	int				exits;
+	int				player;
+	int				collect;
+	t_player		p;
+	t_exit			e;
+	t_collectables	c;
 }t_map;
 
 void	ft_bzero(void *s, size_t n);
