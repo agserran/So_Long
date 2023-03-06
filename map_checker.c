@@ -75,12 +75,12 @@ void	side_checker(t_map *map)
 	{
 		while(x < map->wide)
 		{
-			if(copy[0][x] != '1' || copy[map->height - 1][x] != '1' )
+			if(map->matrix[0][x] != '1' || map->matrix[map->height - 1][x] != '1' )
 			{
 				printf("invalid map\n");
 				return (0);
 			}
-			if(copy[y][map->wide - 1] != '1' || copy[y][0] != '1')
+			if(map->matrix[y][map->wide - 1] != '1' || map->matrix[y][0] != '1')
 			{
 				printf("invalid map");
 				return (0);
