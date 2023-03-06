@@ -52,9 +52,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	**checker(char **str);
 char    **ft_split(char const *s, char c);
 void	ft_putstr(char	*s);
-char	**mapa(int fd);
-int	    len_checker(int	fd, int fd2);
-int	    player_x(char **map);
-int	    player_y(char **map);
+void	side_checker(t_map *map);
+void	mapa(int fd, t_map *map);
+void	len_checker(t_map *map);
+void	height(t_map *map, int fd);
+void    ichecker(t_map *map);
 
 #endif
