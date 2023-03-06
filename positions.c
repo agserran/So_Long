@@ -1,41 +1,31 @@
 #include "so_long.h"
 
-int	player_x(char **map)
+void	positions(t_map *map)
 {
-	int	x;
 	int	y;
+	int	x;
 
-	x = 0;
-	y = 0;
-	while(map[y])
+	while(map->matrix[y])
 	{
-		while(map[y][x])
+		while(map->matrix[y][x])
 		{
-			if(map[y][x] == 'P')
-				return(x);
+			if(map->matrix[y][x] == 'P')
+				{
+					map->p.x = x;
+					map->p.y = y;
+				}
+			if(map->matrix[y][x] == 'E')
+				{
+					map->e.x = x;
+					map->e.y = y;
+				}
+			if(map->matrix[y][x] == 'C')
+				{
+					map->c.x = x;
+					map->c.y = y;
+				}
 			x++;
 		}
 		y++;
 	}
-	return(0);
-}
-
-int	player_y(char **map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while(map[y])
-	{
-		while(map[y][x])
-		{
-			if(map[y][x] == 'P')
-				return(y);
-			x++;
-		}
-		y++;
-	}
-	return(0);
 }
