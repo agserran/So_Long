@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	height(int fd)
+void	height(t_map *map, int fd)
 {
 	char	*lane;
 	int		i;
@@ -24,79 +24,63 @@ int	height(int fd)
 		lane = get_next_line(fd);
 		i++;
 	}
-	return(i);
+	map->height = i;
+	close(fd);
 }
-int	len_checker(int	fd, int fd2)
+
+void	len_checker(t_map *map)
 {
 	int		i;
-	char	**matrix;
-	int		h;
-	int		c;
 	
 	i = 0;
-	h = height(fd);
-	matrix = mapa(fd2);
-	while(i < h)
+	map->wide = ft_strlen(map->matrix[0]);
+	while(i < map->height)
 	{
-		if(ft_strlen(matrix[0]) != ft_strlen(matrix[i]))
+		if(map->wide != ft_strlen(matrix[i]))
 		{
 			ft_putstr("Invalid map, the map have to be rectangular.");
-			return (1);
 		}
 		i++;
 	}
-	return (2);
 }
 
-char	**mapa(int fd)
+void	mapa(int fd, t_map *map)
 {
 	int		i;
 	char	*file;
-	char	*lane;
+	char	*line;
 	char	**matrix;
 
-	lane = get_next_line(fd);
+	line = get_next_line(fd);
 	i = 0;
 	file = ft_calloc(1,1);
-	while (lane)
+	while (line)
 	{
-		file = ft_strjoin(file, lane);
-		lane = get_next_line(fd);
+		file = ft_strjoin(file, line);
+		line = get_next_line(fd);
 		i++;
 	}
-	matrix = ft_split(file, '\n');
+	map->matrix = ft_split(file, '\n');
 	close(fd);
-	return (matrix);
 }
 
-int	side_checker(int fd, int fd2)
+void	side_checker(t_map *map)
 {
-	char	**copy;
 	int		y;
 	int		x;
-	int		max_X;
-	int		max_Y;
 
 	y = 0;
 	x = 0;
-	max_Y = height(fd2);
-	copy = mapa(fd);
-	max_X = ft_strlen(copy[0]);
-	printf("antes del bucle");
-	char	*prueba = copy[2];
-	printf("%d", max_X - 1);
-	while(y < max_Y - 1)
+	while(y < map->height)
 	{
-		printf("bucle2");
-		while(x < max_X)
+		while(x < map->wide)
 		{
-			printf("bucle 3");
-			if(copy[0][x] != '1' || copy[max_Y - 1][x] != '1' )
+			if(copy[0][x] != '1' || copy[map->height - 1][x] != '1' )
 			{
 				printf("invalid map\n");
 				return (0);
 			}
-			if(copy[y][max_X - 1] != '1' || copy[y][0] != '1')
+			if(copy[y][map->wide - 1] != '1' || copy[y][0] != '1')
 			{
 				printf("invalid map");
 				return (0);
@@ -105,15 +89,16 @@ int	side_checker(int fd, int fd2)
 		}
 		y++;
 	}
-	return(1);
 }
 
  int	main(void)
 {
+	t_map map;
 	int		fd;
 	int		fd2;
 	fd = open("C:/Users/agust/Desktop/progamacion/So_Long/map.ber", O_RDONLY);	
-	fd2 = open("C:/Users/agust/Desktop/progamacion/So_Long/map.ber", O_RDONLY);	
+	fd2 = open("C:/Users/agust/Desktop/progamacion/So_Long/map.ber", O_RDONLY);
+	memset(&map, 0, sizeof(t_map));
 	//mapa(fd);
 	//len_checker(fd, fd2);
 	//height(fd2);

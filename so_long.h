@@ -8,6 +8,25 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <string.h>
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}t_player;
+
+typedef struct s_map
+{
+	int			height;
+	int			wide;
+	char		**matrix;
+	char		**copy;
+	int			exits;
+	int			player;
+	int			collect;
+	t_player	p;
+}t_map;
 
 void	ft_bzero(void *s, size_t n);
 size_t	ft_strlen(const char *s);
@@ -21,5 +40,7 @@ char    **ft_split(char const *s, char c);
 void	ft_putstr(char	*s);
 char	**mapa(int fd);
 int	    len_checker(int	fd, int fd2);
+int	    player_x(char **map);
+int	    player_y(char **map);
 
 #endif
