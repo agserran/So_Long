@@ -31,3 +31,27 @@ void	positions(t_map *map)
 		y++;
 	}
 }
+
+void	error_pack1(char *type)
+{
+	if(s == "len")
+	{
+		ft_putstr("Irregular map len, it have to be rectangular.");
+		exit(1);
+	}
+	if(s == "closed")
+	{
+		ft_putstr("The map is not closed correctly.");
+		exit(1);
+	}
+	if(s == "player")
+	{
+		ft_putstr("There has to be only one player.");
+		exit(1);
+	}
+	if(s == "exit")
+	{
+		ft_putstr("There has to be only one exit.");
+		exit(1);
+	}
+}
