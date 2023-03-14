@@ -38,7 +38,7 @@ void	len_checker(t_map *map)
 	{
 		if (map->wide != (int)ft_strlen(map->matrix[i]))
 		{
-			ft_putstr("Invalid map, the map have to be rectangular.");
+			error_pack1("len");
 		}
 		i++;
 	}
@@ -76,11 +76,11 @@ void	side_checker(t_map *map)
 		{
 			if(map->matrix[0][x] != '1' || map->matrix[map->height - 1][x] != '1' )
 			{
-				printf("invalid map\n");
+				error_pack1("closed");
 			}
 			if(map->matrix[y][map->wide - 1] != '1' || map->matrix[y][0] != '1')
 			{
-				printf("invalid map");
+				error_pack1("closed");
 			}
 			x++;
 		}

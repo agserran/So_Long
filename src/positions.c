@@ -54,4 +54,9 @@ void	error_pack1(char *type)
 		ft_putstr("There has to be only one exit.");
 		exit(1);
 	}
+	if(s == "collectables")
+	 {
+		ft_putstr("There has to be at least one collectable.");
+		exit(1);
+	 }
 }

@@ -4,6 +4,17 @@
 #  define BUFFER_SIZE 10
 # endif
 
+# define ESC	53
+# define W		13
+# define A		0
+# define S		1
+# define D		2
+# define UP			126
+# define LEFT		123
+# define DOWN		125
+# define RIGHT		124
+# define ESC 	17
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -16,6 +27,7 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int	moves;
 }t_player;
 
 typedef struct s_collectables
@@ -59,5 +71,12 @@ void	mapa(int fd, t_map *map);
 void	len_checker(t_map *map);
 void	height(t_map *map, int fd);
 void    ichecker(t_map *map);
+void	error_pack1(char *type);
+void    win();
+void    moves(int key, t_map *map);
+void    up(t_map *map);
+void    down(t_map *map);
+void    right(t_map *map);
+void    left(t_map *map);
 
 #endif

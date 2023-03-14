@@ -24,24 +24,10 @@ void    ichecker(t_map *map)
 }
 void	itemsmax(t_map *map)
 {
-	if((map->exits != '1') || (map->player != '1'))
-		printf("error adfkbafa");
+	if((map->exits != '1')
+		error_pack1("exit");
+	if((map->player != '1'))
+		error_pack1("player");
 	if((map->collect < '1'))
-		printf("error dkjñsfahoidagfpdsihghsjidog");
+		error_pack1("collectables");
 }
-
-/*void	inside(t_map *map)
-{
-	map->matrix[y][x] = 'P';
-	int	y;
-	y = 1;
-
-	while(y < map->height - 1)
-	{
-		if (map->matrix[map])
-		{
-			
-		}
-		
-	}
-}*/
